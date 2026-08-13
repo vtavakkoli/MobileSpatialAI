@@ -1,0 +1,1 @@
+-keep class ai.mobilespatial.NativeSpatialCore { native <methods>; }

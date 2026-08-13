@@ -1,0 +1,26 @@
+.gradle/
+build/
+**/build/
+.idea/
+*.iml
+local.properties
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+*.so
+*.o
+*.obj
+.DS_Store
+
+# Generated benchmark evidence
+results/*.json
+results/*.csv
+results/*.html
+!results/.gitkeep
+
+# Downloaded model weights
+models/*.tflite
+models/*.task
+models/*.onnx
+models/*.bin

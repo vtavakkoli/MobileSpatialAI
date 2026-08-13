@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.22)
+project(MobileSpatialAIAndroid LANGUAGES CXX)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../../../../native ${CMAKE_BINARY_DIR}/msai_native)
+add_library(mobilespatial_jni SHARED jni_bridge.cpp)
+target_compile_features(mobilespatial_jni PRIVATE cxx_std_17)
+target_link_libraries(mobilespatial_jni PRIVATE msai_core android log)
+target_compile_options(mobilespatial_jni PRIVATE -Wall -Wextra -Wpedantic)

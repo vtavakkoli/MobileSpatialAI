@@ -1,0 +1,6 @@
+#include <chrono>
+#include <cstdint>
+#include <iostream>
+#include <vector>
+#include "mobile_spatial_ai/spatial_core.hpp"
+int main(){constexpr int width=256,height=144,iterations=5000;std::vector<float>depth(static_cast<std::size_t>(width*height));std::vector<float>confidence(depth.size(),.93F);for(int y=0;y<height;++y)for(int x=0;x<width;++x)depth[static_cast<std::size_t>(y*width+x)]=1.0F+static_cast<float>((x+y)%50)*.02F;msai::SpatialCore core;msai::CameraIntrinsics k{210,210,width/2.0F,height/2.0F};msai::Pose pose{};msai::DepthFrameView view{depth.data(),confidence.data(),width,height,1};msai::Detection2D box{"chair",.94F,80,35,175,130};auto start=std::chrono::steady_clock::now();for(int i=0;i<iterations;++i){pose.translation.x=static_cast<float>(i%100)*.001F;view.timestamp_ns=i+1;(void)core.fuseDetection(box,view,k,pose);}double elapsed=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count();auto s=core.performance().summary("semantic_fusion");std::cout<<"{\n  \"benchmark\": \"semantic_3d_fusion\",\n  \"iterations\": "<<iterations<<",\n  \"total_ms\": "<<elapsed<<",\n  \"throughput_ops_s\": "<<(iterations*1000.0/elapsed)<<",\n  \"window_samples\": "<<s.samples<<",\n  \"p50_ms\": "<<s.p50_ms<<",\n  \"p95_ms\": "<<s.p95_ms<<",\n  \"max_ms\": "<<s.max_ms<<",\n  \"world_objects\": "<<core.objectCount()<<"\n}\n";}
