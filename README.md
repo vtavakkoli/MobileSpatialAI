@@ -72,7 +72,7 @@ results/native-benchmark.json
 
 ## Android build
 
-The project is pinned to Android Gradle Plugin 9.3, JDK 17, compile/target SDK 37 and NDK 28.2.
+The foundation is pinned to Android Gradle Plugin 9.3, JDK 17, compile/target SDK 36 and NDK 28.2. SDK 36 is intentionally used as the reproducible CI baseline; newer SDK adoption should be performed only after the platform package is available on the standard Android SDK channel used by CI.
 
 ```bash
 gradle :app:assembleDebug
