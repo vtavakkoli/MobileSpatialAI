@@ -1,12 +1,12 @@
 plugins { id("com.android.application"); id("org.jetbrains.kotlin.android") }
 android {
     namespace = "ai.mobilespatial"
-    compileSdk = 37
+    compileSdk = 36
     ndkVersion = "28.2.13676358"
     defaultConfig {
         applicationId = "ai.mobilespatial"
         minSdk = 29
-        targetSdk = 37
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0.0-alpha01"
         externalNativeBuild { cmake { cppFlags += listOf("-std=c++17"); arguments += listOf("-DMSAI_BUILD_TESTS=OFF","-DMSAI_BUILD_BENCHMARK=OFF","-DMSAI_ENABLE_FAST_MATH=OFF") } }
