@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+title: MobileSpatialAI
+type: software
+message: "If you use MobileSpatialAI in research, please cite this software and the specific external models/datasets used in your experiment."
+authors:
+  - family-names: Tavakkoli
+    given-names: Vahid
+repository-code: "https://github.com/vtavakkoli/MobileSpatialAI"
+license: Apache-2.0
+version: 1.0.0-alpha01
+date-released: 2026-08-13

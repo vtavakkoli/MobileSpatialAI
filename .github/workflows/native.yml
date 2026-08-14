@@ -1,0 +1,31 @@
+name: Native C++
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        build_type: [Debug, Release]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure
+        run: cmake -S native -B build/native-${{ matrix.build_type }} -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DMSAI_BUILD_TESTS=ON -DMSAI_BUILD_BENCHMARK=ON
+      - name: Build
+        run: cmake --build build/native-${{ matrix.build_type }} --parallel
+      - name: Test
+        run: ctest --test-dir build/native-${{ matrix.build_type }} --output-on-failure
+      - name: Benchmark release core
+        if: matrix.build_type == 'Release'
+        run: mkdir -p results && ./build/native-Release/msai_benchmark | tee results/native-benchmark.json
+      - name: Upload benchmark
+        if: matrix.build_type == 'Release'
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-performance-evidence
+          path: results/native-benchmark.json

@@ -1,0 +1,17 @@
+version: 1
+models:
+  - id: depth-anything-3-small
+    task: monocular-depth
+    status: planned
+    runtime: litert-cpp
+    accelerators: [cpu, gpu, npu]
+    distribution: external
+    note: Add an Android-compatible converted artifact only after model license, conversion reproducibility and accuracy checks are documented.
+
+  - id: mobile-semantic-detector
+    task: object-detection
+    status: planned
+    runtime: litert-cpp
+    accelerators: [cpu, gpu, npu]
+    distribution: external
+    note: The detector adapter is model-agnostic; no third-party weights are redistributed in this foundation PR.
